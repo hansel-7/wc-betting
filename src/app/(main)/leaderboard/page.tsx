@@ -74,13 +74,13 @@ export default async function LeaderboardPage() {
             <div
               className={cn(
                 "grid grid-cols-[40px_1fr_auto] gap-2 px-4 py-3 items-center active:bg-forest-700/20 transition-colors",
-                p.id === user.id && "bg-green-500/5",
+                p.id === user.id && "bg-red-600/5",
                 i !== profiles.length - 1 && "border-b border-forest-700/20"
               )}
             >
               <span className="text-xs text-forest-400 font-medium">{i + 1}</span>
               <div className="min-w-0">
-                <p className={cn("text-sm truncate", p.id === user.id && "text-green-400 font-medium")}>
+                <p className={cn("text-sm truncate", p.id === user.id && "text-red-400 font-medium")}>
                   {p.full_name}{p.id === user.id ? " (You)" : ""}
                 </p>
               </div>

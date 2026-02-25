@@ -42,14 +42,14 @@ export default function SignupPage() {
     return (
       <div className="min-h-dvh flex flex-col items-center justify-center px-6 bg-forest-950">
         <div className="w-full max-w-sm text-center">
-          <h1 className="text-3xl font-bold text-green-400 mb-2">Vinacado</h1>
+          <h1 className="text-3xl font-bold text-red-400 mb-2">Vinacado</h1>
           <div className="bg-forest-800/80 border border-forest-700/30 rounded-2xl p-6 mt-6">
             <p className="text-lg font-semibold mb-2">Check your email</p>
             <p className="text-sm text-forest-400">
               We sent a confirmation link to <span className="text-white font-medium">{email}</span>. Click the link to activate your account.
             </p>
           </div>
-          <Link href="/login" className="text-sm text-green-400 hover:underline mt-6 inline-block">
+          <Link href="/login" className="text-sm text-red-400 hover:underline mt-6 inline-block">
             Back to Sign In
           </Link>
         </div>
@@ -61,7 +61,7 @@ export default function SignupPage() {
     <div className="min-h-dvh flex flex-col items-center justify-center px-6 bg-forest-950">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-green-400 mb-1">Vinacado</h1>
+          <h1 className="text-3xl font-bold text-red-400 mb-1">Vinacado</h1>
           <p className="text-forest-400 text-sm">Join the World Cup 2026 Pool</p>
         </div>
 
@@ -72,7 +72,7 @@ export default function SignupPage() {
               type="text"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-forest-800 border border-forest-700 text-white placeholder-forest-500 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-3 rounded-xl bg-forest-800 border border-forest-700 text-white placeholder-forest-500 focus:outline-none focus:ring-2 focus:ring-red-600"
               placeholder="John Doe"
               required
             />
@@ -83,7 +83,7 @@ export default function SignupPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-forest-800 border border-forest-700 text-white placeholder-forest-500 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-3 rounded-xl bg-forest-800 border border-forest-700 text-white placeholder-forest-500 focus:outline-none focus:ring-2 focus:ring-red-600"
               placeholder="you@company.com"
               required
             />
@@ -94,7 +94,7 @@ export default function SignupPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-forest-800 border border-forest-700 text-white placeholder-forest-500 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-3 rounded-xl bg-forest-800 border border-forest-700 text-white placeholder-forest-500 focus:outline-none focus:ring-2 focus:ring-red-600"
               placeholder="At least 6 characters"
               minLength={6}
               required
@@ -108,7 +108,7 @@ export default function SignupPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-xl bg-green-500 hover:bg-green-600 active:scale-[0.97] text-white font-semibold transition-all disabled:opacity-50"
+            className="w-full py-3 rounded-xl bg-red-600 hover:bg-red-700 active:scale-[0.97] text-white font-semibold transition-all disabled:opacity-50"
           >
             {loading ? "Creating account..." : "Create Account"}
           </button>
@@ -116,7 +116,7 @@ export default function SignupPage() {
 
         <p className="text-center text-forest-400 text-sm mt-6">
           Already have an account?{" "}
-          <Link href="/login" className="text-green-400 hover:underline">
+          <Link href="/login" className="text-red-400 hover:underline">
             Sign in
           </Link>
         </p>

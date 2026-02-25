@@ -61,7 +61,7 @@ export default function BettingSection({
           <span className={cn(
             "text-xs px-2.5 py-1 rounded-full font-medium",
             existingBet.status === "pending" && "bg-yellow-500/20 text-yellow-400",
-            existingBet.status === "won" && "bg-green-500/20 text-green-400",
+            existingBet.status === "won" && "bg-red-600/20 text-red-400",
             existingBet.status === "lost" && "bg-red-500/20 text-red-400",
             existingBet.status === "refunded" && "bg-forest-700/30 text-forest-400"
           )}>
@@ -125,7 +125,7 @@ export default function BettingSection({
           className={cn(
             "p-3 rounded-xl border-2 transition-all text-center",
             prediction === "home"
-              ? "border-green-500 bg-green-500/10"
+              ? "border-red-600 bg-red-600/10"
               : "border-forest-700 hover:border-forest-600",
             "active:scale-[0.95]"
           )}
@@ -138,7 +138,7 @@ export default function BettingSection({
           className={cn(
             "p-3 rounded-xl border-2 transition-all text-center",
             prediction === "away"
-              ? "border-green-500 bg-green-500/10"
+              ? "border-red-600 bg-red-600/10"
               : "border-forest-700 hover:border-forest-600",
             "active:scale-[0.95]"
           )}
@@ -160,7 +160,7 @@ export default function BettingSection({
           onChange={(e) => setAmount(e.target.value)}
           placeholder="100"
           min={1}
-          className="w-full px-4 py-3 rounded-xl bg-forest-900 border border-forest-700 text-white placeholder-forest-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="w-full px-4 py-3 rounded-xl bg-forest-900 border border-forest-700 text-white placeholder-forest-600 focus:outline-none focus:ring-2 focus:ring-red-600"
         />
         {/* Quick buttons */}
         <div className="flex gap-2 mt-2">
@@ -180,7 +180,7 @@ export default function BettingSection({
       {prediction && amountNum > 0 && (
         <div className="bg-forest-900/60 rounded-lg p-2.5 mb-3 text-center border border-forest-700/20">
           <p className="text-[10px] text-forest-500">Estimated return if {prediction === "home" ? match.home_team : match.away_team} wins</p>
-          <p className="text-sm font-semibold text-green-400">{formatPoints(estimatedReturn)} BP</p>
+          <p className="text-sm font-semibold text-red-400">{formatPoints(estimatedReturn)} BP</p>
           <p className="text-[10px] text-forest-500">{pointsToVND(estimatedReturn)}</p>
         </div>
       )}
@@ -190,7 +190,7 @@ export default function BettingSection({
       <button
         onClick={handlePlaceBet}
         disabled={!prediction || amountNum <= 0 || loading}
-        className="w-full py-3 rounded-xl bg-green-500 hover:bg-green-600 active:scale-[0.97] text-white font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+        className="w-full py-3 rounded-xl bg-red-600 hover:bg-red-700 active:scale-[0.97] text-white font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed"
       >
         {loading ? "Placing bet..." : "Place Bet"}
       </button>

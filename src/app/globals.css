@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  --color-forest-950: #06120a;
-  --color-forest-900: #0b1a0f;
-  --color-forest-850: #0f2114;
-  --color-forest-800: #142a19;
-  --color-forest-700: #1e3a24;
-  --color-forest-600: #2a4d31;
-  --color-forest-500: #3d6b45;
-  --color-forest-400: #5a8f61;
-  --color-forest-300: #7db884;
-  --color-forest-200: #a0d4a6;
+  --color-forest-950: #0c0a0a;
+  --color-forest-900: #161212;
+  --color-forest-850: #1d1818;
+  --color-forest-800: #271f1f;
+  --color-forest-700: #382c2c;
+  --color-forest-600: #4d3c3c;
+  --color-forest-500: #6b5252;
+  --color-forest-400: #8f7070;
+  --color-forest-300: #b89a9a;
+  --color-forest-200: #d4bfbf;
 }
 
 :root {
-  --accent: #22c55e;
-  --accent-hover: #16a34a;
+  --accent: #c00000;
+  --accent-hover: #a00000;
 }
 
 body {

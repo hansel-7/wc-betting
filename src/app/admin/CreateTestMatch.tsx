@@ -85,7 +85,7 @@ export default function CreateTestMatch() {
             value={homeTeam}
             onChange={(e) => setHomeTeam(e.target.value)}
             placeholder="e.g. Brazil"
-            className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+            className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-red-600"
           />
         </div>
         <div>
@@ -94,7 +94,7 @@ export default function CreateTestMatch() {
             value={awayTeam}
             onChange={(e) => setAwayTeam(e.target.value)}
             placeholder="e.g. Argentina"
-            className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+            className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-red-600"
           />
         </div>
         <div>
@@ -102,7 +102,7 @@ export default function CreateTestMatch() {
           <input
             value={homeFlag}
             onChange={(e) => setHomeFlag(e.target.value)}
-            className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+            className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-red-600"
           />
         </div>
         <div>
@@ -110,7 +110,7 @@ export default function CreateTestMatch() {
           <input
             value={awayFlag}
             onChange={(e) => setAwayFlag(e.target.value)}
-            className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+            className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-red-600"
           />
         </div>
       </div>
@@ -121,7 +121,7 @@ export default function CreateTestMatch() {
           value={minutesFromNow}
           onChange={(e) => setMinutesFromNow(e.target.value)}
           min={1}
-          className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+          className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-red-600"
         />
         <p className="text-[10px] text-forest-600 mt-1">Betting stops 30 min before match time. Set to 31+ to allow betting now.</p>
       </div>

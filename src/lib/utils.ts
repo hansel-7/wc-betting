@@ -9,7 +9,7 @@ export function pointsToVND(points: number): string {
 }
 
 export function pointsColor(points: number): string {
-  if (points > 0) return "text-green-400";
+  if (points > 0) return "text-red-400";
   if (points < 0) return "text-red-400";
   return "text-forest-400";
 }

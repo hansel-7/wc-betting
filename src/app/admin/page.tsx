@@ -74,7 +74,7 @@ export default async function AdminPage() {
                           "text-[9px] px-1.5 py-0.5 rounded",
                           m.status === "upcoming" && "bg-forest-700 text-forest-400",
                           m.status === "live" && "bg-red-500/20 text-red-400",
-                          m.status === "finished" && "bg-green-500/20 text-green-400"
+                          m.status === "finished" && "bg-red-600/20 text-red-400"
                         )}>
                           {m.status}
                         </span>

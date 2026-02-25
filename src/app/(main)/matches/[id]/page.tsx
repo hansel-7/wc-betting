@@ -91,7 +91,7 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
             <span className={`text-xs px-3 py-1 rounded-full ${
               match.result === "draw"
                 ? "bg-yellow-500/20 text-yellow-400"
-                : "bg-green-500/20 text-green-400"
+                : "bg-red-600/20 text-red-400"
             }`}>
               {match.result === "draw"
                 ? "Draw - All Bets Refunded"

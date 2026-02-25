@@ -102,14 +102,14 @@ export default function PostFeed({
           placeholder="What's on your mind?"
           maxLength={500}
           rows={3}
-          className="w-full bg-forest-900 rounded-lg px-3 py-2.5 text-sm border border-forest-700 placeholder-forest-600 focus:outline-none focus:ring-1 focus:ring-green-500 resize-none"
+          className="w-full bg-forest-900 rounded-lg px-3 py-2.5 text-sm border border-forest-700 placeholder-forest-600 focus:outline-none focus:ring-1 focus:ring-red-600 resize-none"
         />
         <div className="flex items-center justify-between mt-2">
           <span className="text-[10px] text-forest-600">{newPost.length}/500</span>
           <button
             onClick={handlePost}
             disabled={!newPost.trim() || posting}
-            className="px-4 py-1.5 rounded-lg bg-green-500 hover:bg-green-600 active:scale-[0.97] text-white text-xs font-medium transition-all disabled:opacity-40"
+            className="px-4 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 active:scale-[0.97] text-white text-xs font-medium transition-all disabled:opacity-40"
           >
             {posting ? "Posting..." : "Post"}
           </button>
@@ -195,12 +195,12 @@ export default function PostFeed({
                     }}
                     placeholder="Write a comment..."
                     maxLength={300}
-                    className="flex-1 bg-forest-800 rounded-lg px-3 py-2 text-xs border border-forest-700 placeholder-forest-600 focus:outline-none focus:ring-1 focus:ring-green-500"
+                    className="flex-1 bg-forest-800 rounded-lg px-3 py-2 text-xs border border-forest-700 placeholder-forest-600 focus:outline-none focus:ring-1 focus:ring-red-600"
                   />
                   <button
                     onClick={() => handleComment(post.id)}
                     disabled={!commentTexts[post.id]?.trim() || commentingOn === post.id}
-                    className="px-3 py-2 rounded-lg bg-green-500/20 text-green-400 text-xs font-medium hover:bg-green-500/30 active:scale-[0.95] transition-all disabled:opacity-40"
+                    className="px-3 py-2 rounded-lg bg-red-600/20 text-red-400 text-xs font-medium hover:bg-red-600/30 active:scale-[0.95] transition-all disabled:opacity-40"
                   >
                     Send
                   </button>

@@ -49,7 +49,7 @@ export default async function ProfilePage() {
       {/* Profile Header */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-lg font-bold">
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-red-400 to-emerald-600 flex items-center justify-center text-lg font-bold">
             {profile.full_name.charAt(0)}
           </div>
           <div>
@@ -79,8 +79,8 @@ export default async function ProfilePage() {
 
       {/* W / L / R summary */}
       <div className="flex gap-3 mb-6 text-center text-xs">
-        <div className="flex-1 bg-green-500/10 rounded-lg py-2">
-          <span className="text-green-400 font-medium">{wonBets}W</span>
+        <div className="flex-1 bg-red-600/10 rounded-lg py-2">
+          <span className="text-red-400 font-medium">{wonBets}W</span>
         </div>
         <div className="flex-1 bg-red-500/10 rounded-lg py-2">
           <span className="text-red-400 font-medium">{lostBets}L</span>
@@ -144,7 +144,7 @@ function BetCard({ bet, userId }: { bet: any; userId: string }) {
         <span className={cn(
           "text-[10px] px-2 py-0.5 rounded-full font-medium",
           bet.status === "pending" && "bg-yellow-500/20 text-yellow-400",
-          bet.status === "won" && "bg-green-500/20 text-green-400",
+          bet.status === "won" && "bg-red-600/20 text-red-400",
           bet.status === "lost" && "bg-red-500/20 text-red-400",
           bet.status === "refunded" && "bg-forest-700/30 text-forest-400"
         )}>

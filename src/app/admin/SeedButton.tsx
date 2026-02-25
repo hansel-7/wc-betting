@@ -55,7 +55,7 @@ export default function SeedButton() {
       <button
         onClick={handleSeed}
         disabled={loading}
-        className="text-xs bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium disabled:opacity-50 transition-colors"
+        className="text-xs bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium disabled:opacity-50 transition-colors"
       >
         {loading ? "Seeding..." : "Seed Schedule"}
       </button>

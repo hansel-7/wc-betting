@@ -143,8 +143,8 @@ export default async function HomePage() {
       </section>
 
       {/* Invite Banner */}
-      <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30 rounded-2xl p-4 text-center mb-6">
-        <p className="text-sm font-medium text-green-300">Invite your colleagues!</p>
+      <div className="bg-gradient-to-r from-red-600/20 to-red-500/20 border border-red-600/30 rounded-2xl p-4 text-center mb-6">
+        <p className="text-sm font-medium text-red-300">Invite your colleagues!</p>
         <p className="text-xs text-forest-400 mt-1">Share the fun and grow the pool</p>
       </div>
     </div>

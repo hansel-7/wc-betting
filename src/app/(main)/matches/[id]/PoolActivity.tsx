@@ -98,7 +98,7 @@ export default function PoolActivity({
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-medium text-green-400">+{formatPoints(bet.amount)} BP</p>
+                  <p className="text-xs font-medium text-red-400">+{formatPoints(bet.amount)} BP</p>
                   <p className="text-[10px] text-forest-600">{timeAgo(bet.created_at)}</p>
                 </div>
               </div>

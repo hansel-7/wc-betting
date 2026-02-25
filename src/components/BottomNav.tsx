@@ -24,14 +24,14 @@ export default function BottomNav() {
           <div className={cn(
             "w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all active:scale-90",
             isActive("/bet")
-              ? "bg-green-500 shadow-green-500/30"
-              : "bg-green-600 hover:bg-green-500 shadow-green-600/20"
+              ? "bg-red-600 shadow-red-600/30"
+              : "bg-red-700 hover:bg-red-600 shadow-red-700/20"
           )}>
             <BetIcon className="w-6 h-6 text-white" />
           </div>
           <span className={cn(
             "text-[9px] font-medium mt-0.5",
-            isActive("/bet") ? "text-green-400" : "text-forest-400"
+            isActive("/bet") ? "text-red-400" : "text-forest-400"
           )}>
             Bet
           </span>
@@ -63,7 +63,7 @@ function NavLink({
       href={href}
       className={cn(
         "flex flex-col items-center gap-0.5 px-3 py-2 transition-all active:scale-90",
-        active ? "text-green-400" : "text-forest-400 hover:text-forest-300"
+        active ? "text-red-400" : "text-forest-400 hover:text-forest-300"
       )}
     >
       <Icon className="w-5 h-5" />

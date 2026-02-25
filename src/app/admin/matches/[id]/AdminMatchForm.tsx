@@ -137,7 +137,7 @@ export default function AdminMatchForm({ match }: { match: Match }) {
             <input
               value={homeTeam}
               onChange={(e) => setHomeTeam(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-red-600"
             />
           </div>
           <div>
@@ -145,7 +145,7 @@ export default function AdminMatchForm({ match }: { match: Match }) {
             <input
               value={awayTeam}
               onChange={(e) => setAwayTeam(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-red-600"
             />
           </div>
           <div>
@@ -153,7 +153,7 @@ export default function AdminMatchForm({ match }: { match: Match }) {
             <input
               value={homeFlag}
               onChange={(e) => setHomeFlag(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-red-600"
             />
           </div>
           <div>
@@ -161,7 +161,7 @@ export default function AdminMatchForm({ match }: { match: Match }) {
             <input
               value={awayFlag}
               onChange={(e) => setAwayFlag(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-red-600"
             />
           </div>
         </div>
@@ -178,7 +178,7 @@ export default function AdminMatchForm({ match }: { match: Match }) {
               value={homeScore}
               onChange={(e) => setHomeScore(e.target.value)}
               min={0}
-              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-red-600"
             />
           </div>
           <div>
@@ -188,7 +188,7 @@ export default function AdminMatchForm({ match }: { match: Match }) {
               value={awayScore}
               onChange={(e) => setAwayScore(e.target.value)}
               min={0}
-              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-red-600"
             />
           </div>
           <div>
@@ -196,7 +196,7 @@ export default function AdminMatchForm({ match }: { match: Match }) {
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-red-600"
             >
               <option value="upcoming">Upcoming</option>
               <option value="live">Live</option>
@@ -247,8 +247,8 @@ export default function AdminMatchForm({ match }: { match: Match }) {
       )}
 
       {match.result && (
-        <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4">
-          <p className="text-sm text-green-400 text-center mb-3">
+        <div className="bg-red-600/10 border border-red-600/20 rounded-xl p-4">
+          <p className="text-sm text-red-400 text-center mb-3">
             Match settled: <strong>{match.result === "draw" ? "Draw (all refunded)" : match.result === "home" ? `${match.home_team} won` : `${match.away_team} won`}</strong>
           </p>
           <button
@@ -277,7 +277,7 @@ export default function AdminMatchForm({ match }: { match: Match }) {
       {message && (
         <p className={cn(
           "text-xs text-center",
-          message.startsWith("Error") ? "text-red-400" : "text-green-400"
+          message.startsWith("Error") ? "text-red-400" : "text-red-400"
         )}>
           {message}
         </p>

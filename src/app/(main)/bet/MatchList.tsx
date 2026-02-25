@@ -56,7 +56,7 @@ export default function MatchList({
           onClick={() => { setTab("open"); setExpandedId(null); }}
           className={cn(
             "flex-1 py-2 text-xs font-medium rounded-md transition-all",
-            tab === "open" ? "bg-green-500/20 text-green-400" : "text-forest-400"
+            tab === "open" ? "bg-red-600/20 text-red-400" : "text-forest-400"
           )}
         >
           Open ({upcomingMatches.length})
@@ -118,7 +118,7 @@ export default function MatchList({
                         <span className={cn(
                           "text-[9px] px-1.5 py-0.5 rounded",
                           myBet.status === "pending" && "bg-yellow-500/20 text-yellow-400",
-                          myBet.status === "won" && "bg-green-500/20 text-green-400",
+                          myBet.status === "won" && "bg-red-600/20 text-red-400",
                           myBet.status === "lost" && "bg-red-500/20 text-red-400",
                           myBet.status === "refunded" && "bg-forest-700/30 text-forest-400"
                         )}>
@@ -225,7 +225,7 @@ function ExpandedMatchBet({
         <div className={cn(
           "rounded-lg p-2.5 mb-3 text-center text-xs",
           myBet.status === "pending" && "bg-yellow-500/10 border border-yellow-500/20 text-yellow-400",
-          myBet.status === "won" && "bg-green-500/10 border border-green-500/20 text-green-400",
+          myBet.status === "won" && "bg-red-600/10 border border-red-600/20 text-red-400",
           myBet.status === "lost" && "bg-red-500/10 border border-red-500/20 text-red-400",
           myBet.status === "refunded" && "bg-forest-700/20 border border-forest-700/30 text-forest-400"
         )}>
@@ -245,7 +245,7 @@ function ExpandedMatchBet({
               className={cn(
                 "py-2.5 rounded-lg border-2 text-xs font-medium transition-all active:scale-[0.95]",
                 prediction === "home"
-                  ? "border-green-500 bg-green-500/10 text-white"
+                  ? "border-red-600 bg-red-600/10 text-white"
                   : "border-forest-700 text-forest-400 hover:border-forest-600"
               )}
             >
@@ -256,7 +256,7 @@ function ExpandedMatchBet({
               className={cn(
                 "py-2.5 rounded-lg border-2 text-xs font-medium transition-all active:scale-[0.95]",
                 prediction === "away"
-                  ? "border-green-500 bg-green-500/10 text-white"
+                  ? "border-red-600 bg-red-600/10 text-white"
                   : "border-forest-700 text-forest-400 hover:border-forest-600"
               )}
             >
@@ -271,7 +271,7 @@ function ExpandedMatchBet({
               onChange={(e) => setAmount(e.target.value)}
               placeholder="Bet amount (BP)"
               min={1}
-              className="w-full px-3 py-2.5 rounded-lg bg-forest-800 border border-forest-700 text-sm placeholder-forest-600 focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-3 py-2.5 rounded-lg bg-forest-800 border border-forest-700 text-sm placeholder-forest-600 focus:outline-none focus:ring-1 focus:ring-red-600"
             />
             <div className="flex gap-1.5 mt-1.5">
               {[50, 100, 250, 500].map((q) => (
@@ -291,7 +291,7 @@ function ExpandedMatchBet({
               <p className="text-[10px] text-forest-500">
                 Est. return if {prediction === "home" ? match.home_team : match.away_team} wins
               </p>
-              <p className="text-xs font-semibold text-green-400">{formatPoints(estimatedReturn)} BP ({pointsToVND(estimatedReturn)})</p>
+              <p className="text-xs font-semibold text-red-400">{formatPoints(estimatedReturn)} BP ({pointsToVND(estimatedReturn)})</p>
             </div>
           )}
 
@@ -300,7 +300,7 @@ function ExpandedMatchBet({
           <button
             onClick={handlePlaceBet}
             disabled={!prediction || amountNum <= 0 || loading}
-            className="w-full py-2.5 rounded-lg bg-green-500 hover:bg-green-600 active:scale-[0.97] text-white text-xs font-semibold transition-all disabled:opacity-40"
+            className="w-full py-2.5 rounded-lg bg-red-600 hover:bg-red-700 active:scale-[0.97] text-white text-xs font-semibold transition-all disabled:opacity-40"
           >
             {loading ? "Placing..." : "Place Bet"}
           </button>

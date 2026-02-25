@@ -34,7 +34,7 @@ export default function LoginPage() {
     <div className="min-h-dvh flex flex-col items-center justify-center px-6 bg-forest-950">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-green-400 mb-1">Vinacado</h1>
+          <h1 className="text-3xl font-bold text-red-400 mb-1">Vinacado</h1>
           <p className="text-forest-400 text-sm">World Cup 2026 Betting Pool</p>
         </div>
 
@@ -45,7 +45,7 @@ export default function LoginPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-forest-800 border border-forest-700 text-white placeholder-forest-500 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-3 rounded-xl bg-forest-800 border border-forest-700 text-white placeholder-forest-500 focus:outline-none focus:ring-2 focus:ring-red-600"
               placeholder="you@company.com"
               required
             />
@@ -56,7 +56,7 @@ export default function LoginPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-forest-800 border border-forest-700 text-white placeholder-forest-500 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-3 rounded-xl bg-forest-800 border border-forest-700 text-white placeholder-forest-500 focus:outline-none focus:ring-2 focus:ring-red-600"
               placeholder="Your password"
               required
             />
@@ -69,7 +69,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-xl bg-green-500 hover:bg-green-600 active:scale-[0.97] text-white font-semibold transition-all disabled:opacity-50"
+            className="w-full py-3 rounded-xl bg-red-600 hover:bg-red-700 active:scale-[0.97] text-white font-semibold transition-all disabled:opacity-50"
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
@@ -77,7 +77,7 @@ export default function LoginPage() {
 
         <p className="text-center text-forest-400 text-sm mt-6">
           Don&apos;t have an account?{" "}
-          <Link href="/signup" className="text-green-400 hover:underline">
+          <Link href="/signup" className="text-red-400 hover:underline">
             Sign up
           </Link>
         </p>
