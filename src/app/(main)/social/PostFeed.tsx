@@ -58,9 +58,13 @@ export default function PostFeed({
   async function handlePost() {
     if (!newPost.trim() || posting) return;
     setPosting(true);
-    await supabase.from("posts").insert({ user_id: currentUserId, content: newPost.trim() });
-    setNewPost("");
+    const { error } = await supabase.from("posts").insert({ user_id: currentUserId, content: newPost.trim() });
     setPosting(false);
+    if (error) {
+      alert(`Post failed: ${error.message}`);
+      return;
+    }
+    setNewPost("");
     router.refresh();
   }
 

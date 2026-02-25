@@ -39,6 +39,7 @@ export function isBettingOpen(matchTime: string): boolean {
 export function formatMatchTime(matchTime: string): string {
   const d = new Date(matchTime);
   return d.toLocaleDateString("en-US", {
+    timeZone: "Asia/Ho_Chi_Minh",
     weekday: "short",
     month: "short",
     day: "numeric",
