@@ -5,13 +5,19 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Avatar from "@/components/Avatar";
+
+interface ProfileJoin {
+  full_name: string;
+  avatar_url?: string | null;
+}
 
 interface Comment {
   id: string;
   content: string;
   created_at: string;
   user_id: string;
-  profiles: { full_name: string } | { full_name: string }[] | null;
+  profiles: ProfileJoin | ProfileJoin[] | null;
 }
 
 interface Post {
@@ -19,14 +25,14 @@ interface Post {
   content: string;
   created_at: string;
   user_id: string;
-  profiles: { full_name: string } | { full_name: string }[] | null;
+  profiles: ProfileJoin | ProfileJoin[] | null;
   comments: Comment[];
 }
 
-function getName(profiles: { full_name: string } | { full_name: string }[] | null): string {
-  if (!profiles) return "Unknown";
-  if (Array.isArray(profiles)) return profiles[0]?.full_name ?? "Unknown";
-  return profiles.full_name;
+function getProfile(profiles: ProfileJoin | ProfileJoin[] | null): { name: string; avatar: string | null } {
+  if (!profiles) return { name: "Unknown", avatar: null };
+  if (Array.isArray(profiles)) return { name: profiles[0]?.full_name ?? "Unknown", avatar: profiles[0]?.avatar_url ?? null };
+  return { name: profiles.full_name, avatar: profiles.avatar_url ?? null };
 }
 
 function timeAgo(dateStr: string): string {
@@ -130,11 +136,9 @@ export default function PostFeed({
                   href={post.user_id === currentUserId ? "/profile" : `/user/${post.user_id}`}
                   className="flex items-center gap-2"
                 >
-                  <div className="w-8 h-8 rounded-full bg-forest-700 flex items-center justify-center text-xs font-bold text-forest-300">
-                    {getName(post.profiles).charAt(0)}
-                  </div>
+                  <Avatar src={getProfile(post.profiles).avatar} name={getProfile(post.profiles).name} size="sm" />
                   <div>
-                    <p className="text-sm font-medium leading-tight">{getName(post.profiles)}</p>
+                    <p className="text-sm font-medium leading-tight">{getProfile(post.profiles).name}</p>
                     <p className="text-[10px] text-forest-500">{timeAgo(post.created_at)}</p>
                   </div>
                 </Link>
@@ -172,13 +176,14 @@ export default function PostFeed({
                       <div className="flex items-center gap-2 mb-1">
                         <Link
                           href={comment.user_id === currentUserId ? "/profile" : `/user/${comment.user_id}`}
-                          className="text-xs font-medium text-forest-300 hover:text-white transition-colors"
+                          className="flex items-center gap-1.5"
                         >
-                          {getName(comment.profiles)}
+                          <Avatar src={getProfile(comment.profiles).avatar} name={getProfile(comment.profiles).name} size="xs" />
+                          <span className="text-xs font-medium text-forest-300 hover:text-white transition-colors">{getProfile(comment.profiles).name}</span>
                         </Link>
                         <span className="text-[10px] text-forest-600">{timeAgo(comment.created_at)}</span>
                       </div>
-                      <p className="text-xs text-forest-300">{comment.content}</p>
+                      <p className="text-xs text-forest-300 pl-7">{comment.content}</p>
                     </div>
                   ))}
 

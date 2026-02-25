@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { formatPoints, pointsToVND, pointsColor, cn } from "@/lib/utils";
 import Link from "next/link";
+import Avatar from "@/components/Avatar";
 
 export default async function LeaderboardPage() {
   const supabase = await createClient();
@@ -13,7 +14,7 @@ export default async function LeaderboardPage() {
 
   const { data: allProfiles } = await supabase
     .from("profiles")
-    .select("id, full_name, points")
+    .select("id, full_name, points, avatar_url")
     .order("points", { ascending: false });
 
   const profiles = allProfiles ?? [];
@@ -42,10 +43,8 @@ export default async function LeaderboardPage() {
             ];
             return (
               <div key={p.id} className="flex flex-col items-center">
-                <Link href={p.id === user.id ? "/profile" : `/user/${p.id}`}>
-                  <div className="w-12 h-12 rounded-full bg-forest-700 border-2 border-forest-600 flex items-center justify-center text-sm font-bold mb-2 active:scale-90 transition-transform">
-                    {p.full_name.charAt(0)}
-                  </div>
+                <Link href={p.id === user.id ? "/profile" : `/user/${p.id}`} className="mb-2 active:scale-90 transition-transform">
+                  <Avatar src={p.avatar_url} name={p.full_name} size="lg" className="border-2 border-forest-600" />
                 </Link>
                 <p className="text-xs font-medium truncate max-w-[80px] text-center">{p.full_name}</p>
                 <p className={`text-[10px] mb-1 ${pointsColor(p.points)}`}>{formatPoints(p.points)} BP</p>
@@ -64,8 +63,9 @@ export default async function LeaderboardPage() {
 
       {/* Full list */}
       <div className="bg-forest-800/60 rounded-xl overflow-hidden border border-forest-700/30">
-        <div className="grid grid-cols-[40px_1fr_auto] gap-2 px-4 py-2 text-[10px] text-forest-500 border-b border-forest-700/30">
+        <div className="grid grid-cols-[30px_28px_1fr_auto] gap-2 px-4 py-2 text-[10px] text-forest-500 border-b border-forest-700/30 items-center">
           <span>#</span>
+          <span></span>
           <span>User</span>
           <span className="text-right">Points</span>
         </div>
@@ -73,12 +73,13 @@ export default async function LeaderboardPage() {
           <Link key={p.id} href={p.id === user.id ? "/profile" : `/user/${p.id}`}>
             <div
               className={cn(
-                "grid grid-cols-[40px_1fr_auto] gap-2 px-4 py-3 items-center active:bg-forest-700/20 transition-colors",
+                "grid grid-cols-[30px_28px_1fr_auto] gap-2 px-4 py-2.5 items-center active:bg-forest-700/20 transition-colors",
                 p.id === user.id && "bg-red-600/5",
                 i !== profiles.length - 1 && "border-b border-forest-700/20"
               )}
             >
               <span className="text-xs text-forest-400 font-medium">{i + 1}</span>
+              <Avatar src={p.avatar_url} name={p.full_name} size="xs" />
               <div className="min-w-0">
                 <p className={cn("text-sm truncate", p.id === user.id && "text-red-400 font-medium")}>
                   {p.full_name}{p.id === user.id ? " (You)" : ""}

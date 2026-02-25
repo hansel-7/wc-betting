@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { formatPoints, pointsToVND, pointsColor, formatMatchTime, cn } from "@/lib/utils";
 import SignOutButton from "./SignOutButton";
+import AvatarUpload from "@/components/AvatarUpload";
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -49,9 +50,7 @@ export default async function ProfilePage() {
       {/* Profile Header */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-red-400 to-emerald-600 flex items-center justify-center text-lg font-bold">
-            {profile.full_name.charAt(0)}
-          </div>
+          <AvatarUpload userId={user.id} currentUrl={profile.avatar_url} name={profile.full_name} />
           <div>
             <h1 className="text-lg font-bold">{profile.full_name}</h1>
             <p className="text-xs text-forest-400">Rank #{rank}</p>

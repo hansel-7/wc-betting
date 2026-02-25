@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { formatPoints } from "@/lib/utils";
 import Link from "next/link";
+import Avatar from "@/components/Avatar";
 
 interface BetActivity {
   id: string;
@@ -11,7 +12,7 @@ interface BetActivity {
   amount: number;
   created_at: string;
   user_id: string;
-  profiles: { full_name: string } | { full_name: string }[] | null;
+  profiles: { full_name: string; avatar_url?: string | null } | { full_name: string; avatar_url?: string | null }[] | null;
 }
 
 export default function PoolActivity({
@@ -28,10 +29,10 @@ export default function PoolActivity({
   const [bets, setBets] = useState<BetActivity[]>(initialBets);
   const supabase = createClient();
 
-  function getFullName(profiles: BetActivity["profiles"]): string {
-    if (!profiles) return "Unknown";
-    if (Array.isArray(profiles)) return profiles[0]?.full_name ?? "Unknown";
-    return profiles.full_name;
+  function getProfile(profiles: BetActivity["profiles"]): { name: string; avatar: string | null } {
+    if (!profiles) return { name: "Unknown", avatar: null };
+    if (Array.isArray(profiles)) return { name: profiles[0]?.full_name ?? "Unknown", avatar: profiles[0]?.avatar_url ?? null };
+    return { name: profiles.full_name, avatar: profiles.avatar_url ?? null };
   }
 
   useEffect(() => {
@@ -48,7 +49,7 @@ export default function PoolActivity({
         async (payload) => {
           const { data: profile } = await supabase
             .from("profiles")
-            .select("full_name")
+            .select("full_name, avatar_url")
             .eq("id", (payload.new as { user_id: string }).user_id)
             .single();
 
@@ -86,12 +87,10 @@ export default function PoolActivity({
           {bets.map((bet) => (
             <Link key={bet.id} href={`/user/${bet.user_id}`}>
               <div className="flex items-center gap-3 bg-forest-800/40 rounded-lg p-3 border border-forest-700/20 active:bg-forest-700/20 transition-colors">
-                <div className="w-8 h-8 rounded-full bg-forest-700 flex items-center justify-center text-xs font-bold">
-                  {getFullName(bet.profiles).charAt(0).toUpperCase()}
-                </div>
+                <Avatar src={getProfile(bet.profiles).avatar} name={getProfile(bet.profiles).name} size="sm" />
                 <div className="flex-1 min-w-0">
                   <p className="text-xs font-medium truncate">
-                    {getFullName(bet.profiles)}
+                    {getProfile(bet.profiles).name}
                   </p>
                   <p className="text-[10px] text-forest-500">
                     Bet on {bet.prediction === "home" ? homeTeam : awayTeam}

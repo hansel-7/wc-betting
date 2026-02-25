@@ -12,7 +12,7 @@ export default async function SocialPage() {
 
   const { data: posts, error: postsError } = await supabase
     .from("posts")
-    .select("id, content, created_at, user_id, profiles(full_name)")
+    .select("id, content, created_at, user_id, profiles(full_name, avatar_url)")
     .order("created_at", { ascending: false })
     .limit(50);
 
@@ -21,7 +21,7 @@ export default async function SocialPage() {
   const { data: comments } = postIds.length > 0
     ? await supabase
         .from("comments")
-        .select("id, content, created_at, user_id, post_id, profiles(full_name)")
+        .select("id, content, created_at, user_id, post_id, profiles(full_name, avatar_url)")
         .in("post_id", postIds)
         .order("created_at", { ascending: true })
     : { data: [] };

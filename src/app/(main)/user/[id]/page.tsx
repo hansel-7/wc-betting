@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { formatPoints, pointsToVND, pointsColor, cn } from "@/lib/utils";
 import Link from "next/link";
+import Avatar from "@/components/Avatar";
 
 export default async function UserProfilePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -17,7 +18,7 @@ export default async function UserProfilePage({ params }: { params: Promise<{ id
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("id, full_name, points")
+    .select("id, full_name, points, avatar_url")
     .eq("id", id)
     .single();
 
@@ -56,9 +57,7 @@ export default async function UserProfilePage({ params }: { params: Promise<{ id
 
       {/* Profile Header */}
       <div className="flex items-center gap-3 mb-5">
-        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-red-400 to-emerald-600 flex items-center justify-center text-lg font-bold">
-          {profile.full_name.charAt(0)}
-        </div>
+        <Avatar src={profile.avatar_url} name={profile.full_name} size="lg" />
         <div>
           <h1 className="text-lg font-bold">{profile.full_name}</h1>
           <p className="text-xs text-forest-400">Rank #{rank}</p>

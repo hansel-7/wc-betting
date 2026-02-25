@@ -46,7 +46,7 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
   // Recent bets for activity feed
   const { data: recentBets } = await supabase
     .from("bets")
-    .select("id, prediction, amount, created_at, user_id, profiles(full_name)")
+    .select("id, prediction, amount, created_at, user_id, profiles(full_name, avatar_url)")
     .eq("match_id", id)
     .order("created_at", { ascending: false })
     .limit(20);
