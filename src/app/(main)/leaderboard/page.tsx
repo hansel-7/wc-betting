@@ -12,7 +12,7 @@ export default async function LeaderboardPage() {
 
   const { data: allProfiles } = await supabase
     .from("profiles")
-    .select("id, full_name, department, points")
+    .select("id, full_name, points")
     .order("points", { ascending: false });
 
   const profiles = allProfiles ?? [];
@@ -35,13 +35,13 @@ export default async function LeaderboardPage() {
             const rank = i === 0 ? 2 : i === 1 ? 1 : 3;
             const height = i === 1 ? "h-28" : "h-20";
             const colors = [
-              "from-slate-400 to-slate-500",
+              "from-forest-500 to-forest-600",
               "from-yellow-400 to-amber-500",
               "from-amber-600 to-amber-700",
             ];
             return (
               <div key={p.id} className="flex flex-col items-center">
-                <div className="w-12 h-12 rounded-full bg-slate-700 flex items-center justify-center text-sm font-bold mb-2">
+                <div className="w-12 h-12 rounded-full bg-forest-700 border-2 border-forest-600 flex items-center justify-center text-sm font-bold mb-2">
                   {p.full_name.charAt(0)}
                 </div>
                 <p className="text-xs font-medium truncate max-w-[80px] text-center">{p.full_name}</p>
@@ -60,8 +60,8 @@ export default async function LeaderboardPage() {
       )}
 
       {/* Full list */}
-      <div className="bg-slate-800/60 rounded-xl overflow-hidden">
-        <div className="grid grid-cols-[40px_1fr_auto] gap-2 px-4 py-2 text-[10px] text-slate-500 border-b border-slate-700/50">
+      <div className="bg-forest-800/60 rounded-xl overflow-hidden border border-forest-700/30">
+        <div className="grid grid-cols-[40px_1fr_auto] gap-2 px-4 py-2 text-[10px] text-forest-500 border-b border-forest-700/30">
           <span>#</span>
           <span>User</span>
           <span className="text-right">Points</span>
@@ -72,24 +72,23 @@ export default async function LeaderboardPage() {
             className={cn(
               "grid grid-cols-[40px_1fr_auto] gap-2 px-4 py-3 items-center",
               p.id === user.id && "bg-green-500/5",
-              i !== profiles.length - 1 && "border-b border-slate-800/50"
+              i !== profiles.length - 1 && "border-b border-forest-700/20"
             )}
           >
-            <span className="text-xs text-slate-400 font-medium">{i + 1}</span>
+            <span className="text-xs text-forest-400 font-medium">{i + 1}</span>
             <div className="min-w-0">
               <p className={cn("text-sm truncate", p.id === user.id && "text-green-400 font-medium")}>
                 {p.full_name}{p.id === user.id ? " (You)" : ""}
               </p>
-              <p className="text-[10px] text-slate-600">{p.department}</p>
             </div>
             <div className="text-right">
               <p className={`text-sm font-medium ${pointsColor(p.points)}`}>{formatPoints(p.points)}</p>
-              <p className="text-[10px] text-slate-500">{pointsToVND(p.points)}</p>
+              <p className="text-[10px] text-forest-500">{pointsToVND(p.points)}</p>
             </div>
           </div>
         ))}
         {profiles.length === 0 && (
-          <p className="text-sm text-slate-500 text-center py-8">No players yet</p>
+          <p className="text-sm text-forest-500 text-center py-8">No players yet</p>
         )}
       </div>
     </div>

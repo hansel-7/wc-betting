@@ -13,7 +13,6 @@ export default async function AdminPage() {
 
   const allMatches = matches ?? [];
 
-  // Group by stage
   const stages = [
     "Group Stage",
     "Round of 32",
@@ -32,34 +31,34 @@ export default async function AdminPage() {
   return (
     <div className="px-4 py-4">
       <div className="flex items-center justify-between mb-4">
-        <p className="text-sm text-slate-400">{count ?? 0} matches in database</p>
+        <p className="text-sm text-forest-400">{count ?? 0} matches in database</p>
         {(count ?? 0) === 0 && <SeedButton />}
       </div>
 
       {allMatches.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-slate-500 mb-2">No matches seeded yet.</p>
-          <p className="text-xs text-slate-600">Click &quot;Seed Schedule&quot; to import all 104 World Cup matches.</p>
+          <p className="text-forest-500 mb-2">No matches seeded yet.</p>
+          <p className="text-xs text-forest-600">Click &quot;Seed Schedule&quot; to import all 104 World Cup matches.</p>
         </div>
       ) : (
         <div className="space-y-6">
           {grouped.map(({ stage, matches }) =>
             matches.length > 0 ? (
               <section key={stage}>
-                <h2 className="text-sm font-semibold text-slate-300 mb-2 sticky top-0 bg-slate-950 py-1">{stage}</h2>
+                <h2 className="text-sm font-semibold text-forest-300 mb-2 sticky top-0 bg-forest-950 py-1">{stage}</h2>
                 <div className="space-y-1.5">
                   {matches.map((m) => (
                     <Link key={m.id} href={`/admin/matches/${m.id}`}>
                       <div className={cn(
-                        "flex items-center gap-2 px-3 py-2.5 rounded-lg hover:bg-slate-800 transition-colors",
+                        "flex items-center gap-2 px-3 py-2.5 rounded-lg hover:bg-forest-800 transition-colors",
                         m.status === "live" && "bg-red-500/5 border border-red-500/20",
                         m.status === "finished" && "opacity-60",
-                        m.status === "upcoming" && "bg-slate-800/40"
+                        m.status === "upcoming" && "bg-forest-800/40"
                       )}>
-                        <span className="text-[10px] text-slate-600 w-6">#{m.match_number}</span>
+                        <span className="text-[10px] text-forest-600 w-6">#{m.match_number}</span>
                         <span className="text-xs">{m.home_flag}</span>
                         <span className="text-xs truncate flex-1">{m.home_team}</span>
-                        <span className="text-[10px] text-slate-600">
+                        <span className="text-[10px] text-forest-600">
                           {m.status === "finished"
                             ? `${m.home_score}-${m.away_score}`
                             : "vs"}
@@ -68,7 +67,7 @@ export default async function AdminPage() {
                         <span className="text-xs">{m.away_flag}</span>
                         <span className={cn(
                           "text-[9px] px-1.5 py-0.5 rounded",
-                          m.status === "upcoming" && "bg-slate-700 text-slate-400",
+                          m.status === "upcoming" && "bg-forest-700 text-forest-400",
                           m.status === "live" && "bg-red-500/20 text-red-400",
                           m.status === "finished" && "bg-green-500/20 text-green-400"
                         )}>

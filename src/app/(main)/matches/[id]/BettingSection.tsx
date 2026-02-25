@@ -49,21 +49,21 @@ export default function BettingSection({
   if (existingBet) {
     const teamName = existingBet.prediction === "home" ? match.home_team : match.away_team;
     return (
-      <div className="bg-slate-800/60 rounded-xl p-4 mb-5">
+      <div className="bg-forest-800/60 rounded-xl p-4 mb-5 border border-forest-700/20">
         <p className="text-sm font-medium mb-2">Your Bet</p>
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm text-slate-300">
+            <p className="text-sm text-forest-300">
               {teamName} to win
             </p>
-            <p className="text-xs text-slate-500">{formatPoints(existingBet.amount)} BP</p>
+            <p className="text-xs text-forest-500">{formatPoints(existingBet.amount)} BP</p>
           </div>
           <span className={cn(
             "text-xs px-2.5 py-1 rounded-full font-medium",
             existingBet.status === "pending" && "bg-yellow-500/20 text-yellow-400",
             existingBet.status === "won" && "bg-green-500/20 text-green-400",
             existingBet.status === "lost" && "bg-red-500/20 text-red-400",
-            existingBet.status === "refunded" && "bg-slate-500/20 text-slate-400"
+            existingBet.status === "refunded" && "bg-forest-700/30 text-forest-400"
           )}>
             {existingBet.status === "pending" ? "Pending" :
              existingBet.status === "won" ? `Won +${formatPoints(existingBet.points_earned)} BP` :
@@ -77,8 +77,8 @@ export default function BettingSection({
 
   if (!bettingOpen) {
     return (
-      <div className="bg-slate-800/40 rounded-xl p-4 mb-5 text-center">
-        <p className="text-sm text-slate-500">
+      <div className="bg-forest-800/40 rounded-xl p-4 mb-5 text-center border border-forest-700/20">
+        <p className="text-sm text-forest-500">
           {match.result ? "Match has been settled" : "Betting is closed"}
         </p>
       </div>
@@ -88,8 +88,6 @@ export default function BettingSection({
   const amountNum = parseInt(amount) || 0;
   const estimatedReturn = (() => {
     if (!prediction || amountNum <= 0) return 0;
-    const myTotal = prediction === "home" ? totalHome + amountNum : totalHome;
-    const otherTotal = prediction === "home" ? totalAway : totalAway;
     const mySide = prediction === "home" ? totalHome + amountNum : totalAway + amountNum;
     const otherSide = prediction === "home" ? totalAway : totalHome;
     if (mySide === 0) return amountNum;
@@ -117,7 +115,7 @@ export default function BettingSection({
   }
 
   return (
-    <div className="bg-slate-800/60 rounded-xl p-4 mb-5">
+    <div className="bg-forest-800/60 rounded-xl p-4 mb-5 border border-forest-700/20">
       <p className="text-sm font-medium mb-3">Place Your Bet</p>
 
       {/* Team selector */}
@@ -127,8 +125,8 @@ export default function BettingSection({
           className={cn(
             "p-3 rounded-xl border-2 transition-all text-center",
             prediction === "home"
-              ? "border-blue-500 bg-blue-500/10"
-              : "border-slate-700 hover:border-slate-600"
+              ? "border-green-500 bg-green-500/10"
+              : "border-forest-700 hover:border-forest-600"
           )}
         >
           <span className="text-lg block">{match.home_flag}</span>
@@ -139,8 +137,8 @@ export default function BettingSection({
           className={cn(
             "p-3 rounded-xl border-2 transition-all text-center",
             prediction === "away"
-              ? "border-orange-500 bg-orange-500/10"
-              : "border-slate-700 hover:border-slate-600"
+              ? "border-green-500 bg-green-500/10"
+              : "border-forest-700 hover:border-forest-600"
           )}
         >
           <span className="text-lg block">{match.away_flag}</span>
@@ -151,8 +149,8 @@ export default function BettingSection({
       {/* Amount input */}
       <div className="mb-3">
         <div className="flex items-center justify-between mb-1">
-          <label className="text-xs text-slate-400">Bet Amount (BP)</label>
-          <span className="text-[10px] text-slate-500">Balance: {formatPoints(userPoints)} BP</span>
+          <label className="text-xs text-forest-400">Bet Amount (BP)</label>
+          <span className="text-[10px] text-forest-500">Balance: {formatPoints(userPoints)} BP</span>
         </div>
         <input
           type="number"
@@ -160,7 +158,7 @@ export default function BettingSection({
           onChange={(e) => setAmount(e.target.value)}
           placeholder="100"
           min={1}
-          className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="w-full px-4 py-3 rounded-xl bg-forest-900 border border-forest-700 text-white placeholder-forest-600 focus:outline-none focus:ring-2 focus:ring-green-500"
         />
         {/* Quick buttons */}
         <div className="flex gap-2 mt-2">
@@ -168,7 +166,7 @@ export default function BettingSection({
             <button
               key={q}
               onClick={() => setAmount(String(q))}
-              className="flex-1 text-[10px] py-1.5 rounded-lg bg-slate-700 hover:bg-slate-600 transition-colors"
+              className="flex-1 text-[10px] py-1.5 rounded-lg bg-forest-700 hover:bg-forest-600 transition-colors"
             >
               {q}
             </button>
@@ -178,10 +176,10 @@ export default function BettingSection({
 
       {/* Estimated return */}
       {prediction && amountNum > 0 && (
-        <div className="bg-slate-900/60 rounded-lg p-2.5 mb-3 text-center">
-          <p className="text-[10px] text-slate-500">Estimated return if {prediction === "home" ? match.home_team : match.away_team} wins</p>
+        <div className="bg-forest-900/60 rounded-lg p-2.5 mb-3 text-center border border-forest-700/20">
+          <p className="text-[10px] text-forest-500">Estimated return if {prediction === "home" ? match.home_team : match.away_team} wins</p>
           <p className="text-sm font-semibold text-green-400">{formatPoints(estimatedReturn)} BP</p>
-          <p className="text-[10px] text-slate-500">{pointsToVND(estimatedReturn)}</p>
+          <p className="text-[10px] text-forest-500">{pointsToVND(estimatedReturn)}</p>
         </div>
       )}
 

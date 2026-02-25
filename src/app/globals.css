@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+@theme {
+  --color-forest-950: #06120a;
+  --color-forest-900: #0b1a0f;
+  --color-forest-850: #0f2114;
+  --color-forest-800: #142a19;
+  --color-forest-700: #1e3a24;
+  --color-forest-600: #2a4d31;
+  --color-forest-500: #3d6b45;
+  --color-forest-400: #5a8f61;
+  --color-forest-300: #7db884;
+  --color-forest-200: #a0d4a6;
+}
+
 :root {
   --accent: #22c55e;
   --accent-hover: #16a34a;

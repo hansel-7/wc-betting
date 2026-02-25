@@ -20,9 +20,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   return (
     <div className="max-w-2xl mx-auto min-h-dvh">
-      <div className="flex items-center justify-between px-4 py-4 border-b border-slate-800">
+      <div className="flex items-center justify-between px-4 py-4 border-b border-forest-700/30">
         <h1 className="text-lg font-bold text-amber-400">Admin Panel</h1>
-        <Link href="/" className="text-xs text-slate-400 hover:text-white transition-colors">
+        <Link href="/" className="text-xs text-forest-400 hover:text-white transition-colors">
           Back to App
         </Link>
       </div>

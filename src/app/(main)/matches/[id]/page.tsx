@@ -54,8 +54,8 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
   return (
     <div className="px-4 pt-6">
       {/* Match Header */}
-      <div className="bg-slate-800/80 rounded-2xl p-5 mb-5">
-        <p className="text-center text-[10px] text-slate-400 mb-3">
+      <div className="bg-forest-800/80 rounded-2xl p-5 mb-5 border border-forest-700/30">
+        <p className="text-center text-[10px] text-forest-400 mb-3">
           {match.stage}{match.group ? ` - Group ${match.group}` : ""}
         </p>
         <div className="flex items-center justify-between">
@@ -69,14 +69,14 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
                 <p className="text-2xl font-bold">
                   {match.home_score ?? 0} - {match.away_score ?? 0}
                 </p>
-                <p className={`text-[10px] mt-1 ${match.status === "live" ? "text-red-400" : "text-slate-500"}`}>
+                <p className={`text-[10px] mt-1 ${match.status === "live" ? "text-red-400" : "text-forest-500"}`}>
                   {match.status === "live" ? "LIVE" : "FT"}
                 </p>
               </div>
             ) : (
               <div>
-                <p className="text-lg font-bold text-slate-300">VS</p>
-                <p className="text-[10px] text-slate-500 mt-1">{formatMatchTime(match.match_time)}</p>
+                <p className="text-lg font-bold text-forest-300">VS</p>
+                <p className="text-[10px] text-forest-500 mt-1">{formatMatchTime(match.match_time)}</p>
               </div>
             )}
           </div>
@@ -104,15 +104,15 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
       </div>
 
       {/* Pool Breakdown */}
-      <div className="bg-slate-800/60 rounded-xl p-4 mb-5">
-        <p className="text-xs text-slate-400 mb-2">Pool Breakdown</p>
+      <div className="bg-forest-800/60 rounded-xl p-4 mb-5 border border-forest-700/20">
+        <p className="text-xs text-forest-400 mb-2">Pool Breakdown</p>
         <div className="flex items-center gap-2">
           <div className="flex-1">
             <div className="flex justify-between text-xs mb-1">
               <span className="text-blue-400">{match.home_team}</span>
-              <span className="text-slate-300">{totalHome.toLocaleString()} BP</span>
+              <span className="text-forest-300">{totalHome.toLocaleString()} BP</span>
             </div>
-            <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+            <div className="h-2 bg-forest-700/50 rounded-full overflow-hidden">
               <div
                 className="h-full bg-blue-500 rounded-full transition-all"
                 style={{ width: `${totalHome + totalAway > 0 ? (totalHome / (totalHome + totalAway)) * 100 : 50}%` }}
@@ -122,9 +122,9 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
           <div className="flex-1">
             <div className="flex justify-between text-xs mb-1">
               <span className="text-orange-400">{match.away_team}</span>
-              <span className="text-slate-300">{totalAway.toLocaleString()} BP</span>
+              <span className="text-forest-300">{totalAway.toLocaleString()} BP</span>
             </div>
-            <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+            <div className="h-2 bg-forest-700/50 rounded-full overflow-hidden">
               <div
                 className="h-full bg-orange-500 rounded-full transition-all"
                 style={{ width: `${totalHome + totalAway > 0 ? (totalAway / (totalHome + totalAway)) * 100 : 50}%` }}
@@ -132,7 +132,7 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
             </div>
           </div>
         </div>
-        <p className="text-center text-[10px] text-slate-500 mt-2">
+        <p className="text-center text-[10px] text-forest-500 mt-2">
           Total Pool: {(totalHome + totalAway).toLocaleString()} BP
         </p>
       </div>

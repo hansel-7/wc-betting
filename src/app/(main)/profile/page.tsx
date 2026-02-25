@@ -37,13 +37,12 @@ export default async function ProfilePage() {
   const decidedBets = wonBets + lostBets;
   const winRate = decidedBets > 0 ? Math.round((wonBets / decidedBets) * 100) : 0;
 
-  // Department leaderboard
-  const { data: deptProfiles } = await supabase
+  // Get user rank
+  const { count: rankCount } = await supabase
     .from("profiles")
-    .select("id, full_name, points")
-    .eq("department", profile.department)
-    .order("points", { ascending: false })
-    .limit(5);
+    .select("*", { count: "exact", head: true })
+    .gt("points", profile.points);
+  const rank = (rankCount ?? 0) + 1;
 
   return (
     <div className="px-4 pt-6">
@@ -55,7 +54,7 @@ export default async function ProfilePage() {
           </div>
           <div>
             <h1 className="text-lg font-bold">{profile.full_name}</h1>
-            <p className="text-xs text-slate-400">{profile.department}</p>
+            <p className="text-xs text-forest-400">Rank #{rank}</p>
           </div>
         </div>
         <SignOutButton />
@@ -63,18 +62,18 @@ export default async function ProfilePage() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-3 gap-2 mb-6">
-        <div className="bg-slate-800/80 rounded-xl p-3 text-center">
+        <div className="bg-forest-800/80 rounded-xl p-3 text-center border border-forest-700/30">
           <p className={`text-lg font-bold ${pointsColor(profile.points)}`}>{formatPoints(profile.points)}</p>
-          <p className="text-[9px] text-slate-500">{pointsToVND(profile.points)}</p>
-          <p className="text-[10px] text-slate-500 mt-0.5">{profile.points < 0 ? "You owe" : "Balance"}</p>
+          <p className="text-[9px] text-forest-500">{pointsToVND(profile.points)}</p>
+          <p className="text-[10px] text-forest-500 mt-0.5">{profile.points < 0 ? "You owe" : "Balance"}</p>
         </div>
-        <div className="bg-slate-800/80 rounded-xl p-3 text-center">
+        <div className="bg-forest-800/80 rounded-xl p-3 text-center border border-forest-700/30">
           <p className="text-lg font-bold">{winRate}%</p>
-          <p className="text-[10px] text-slate-500 mt-0.5">Win Rate</p>
+          <p className="text-[10px] text-forest-500 mt-0.5">Win Rate</p>
         </div>
-        <div className="bg-slate-800/80 rounded-xl p-3 text-center">
+        <div className="bg-forest-800/80 rounded-xl p-3 text-center border border-forest-700/30">
           <p className="text-lg font-bold">{totalBets}</p>
-          <p className="text-[10px] text-slate-500 mt-0.5">Total Bets</p>
+          <p className="text-[10px] text-forest-500 mt-0.5">Total Bets</p>
         </div>
       </div>
 
@@ -86,41 +85,16 @@ export default async function ProfilePage() {
         <div className="flex-1 bg-red-500/10 rounded-lg py-2">
           <span className="text-red-400 font-medium">{lostBets}L</span>
         </div>
-        <div className="flex-1 bg-slate-500/10 rounded-lg py-2">
-          <span className="text-slate-400 font-medium">{refundedBets}R</span>
+        <div className="flex-1 bg-forest-700/30 rounded-lg py-2">
+          <span className="text-forest-400 font-medium">{refundedBets}R</span>
         </div>
       </div>
-
-      {/* Department Leaderboard */}
-      {deptProfiles && deptProfiles.length > 1 && (
-        <section className="mb-6">
-          <h2 className="text-sm font-semibold mb-2">{profile.department} Leaderboard</h2>
-          <div className="bg-slate-800/60 rounded-xl overflow-hidden">
-            {deptProfiles.map((p, i) => (
-              <div
-                key={p.id}
-                className={cn(
-                  "flex items-center gap-3 px-3 py-2.5",
-                  p.id === user.id && "bg-green-500/5",
-                  i !== deptProfiles.length - 1 && "border-b border-slate-800/50"
-                )}
-              >
-                <span className="text-xs text-slate-500 w-5">{i + 1}</span>
-                <p className={cn("text-sm flex-1 truncate", p.id === user.id && "text-green-400 font-medium")}>
-                  {p.id === user.id ? "You" : p.full_name}
-                </p>
-                <span className="text-xs text-slate-400">{formatPoints(p.points)} pts</span>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
 
       {/* Active Bets */}
       <section className="mb-6">
         <h2 className="text-sm font-semibold mb-2">Active Bets ({activeBets.length})</h2>
         {activeBets.length === 0 ? (
-          <p className="text-xs text-slate-500 text-center py-4 bg-slate-800/40 rounded-xl">No active bets</p>
+          <p className="text-xs text-forest-500 text-center py-4 bg-forest-800/40 rounded-xl border border-forest-700/20">No active bets</p>
         ) : (
           <div className="space-y-2">
             {activeBets.map((bet) => (
@@ -134,7 +108,7 @@ export default async function ProfilePage() {
       <section className="mb-6">
         <h2 className="text-sm font-semibold mb-2">Bet History ({historyBets.length})</h2>
         {historyBets.length === 0 ? (
-          <p className="text-xs text-slate-500 text-center py-4 bg-slate-800/40 rounded-xl">No completed bets</p>
+          <p className="text-xs text-forest-500 text-center py-4 bg-forest-800/40 rounded-xl border border-forest-700/20">No completed bets</p>
         ) : (
           <div className="space-y-2">
             {historyBets.map((bet) => (
@@ -155,14 +129,14 @@ function BetCard({ bet, userId }: { bet: any; userId: string }) {
   const teamFlag = bet.prediction === "home" ? match.home_flag : match.away_flag;
 
   return (
-    <div className="bg-slate-800/60 rounded-xl p-3">
+    <div className="bg-forest-800/60 rounded-xl p-3 border border-forest-700/20">
       <div className="flex items-center justify-between mb-1">
         <div className="flex items-center gap-2">
           <span>{match.home_flag}</span>
-          <span className="text-xs text-slate-400">vs</span>
+          <span className="text-xs text-forest-400">vs</span>
           <span>{match.away_flag}</span>
           {match.status === "finished" && (
-            <span className="text-xs text-slate-500 ml-1">
+            <span className="text-xs text-forest-500 ml-1">
               {match.home_score} - {match.away_score}
             </span>
           )}
@@ -172,7 +146,7 @@ function BetCard({ bet, userId }: { bet: any; userId: string }) {
           bet.status === "pending" && "bg-yellow-500/20 text-yellow-400",
           bet.status === "won" && "bg-green-500/20 text-green-400",
           bet.status === "lost" && "bg-red-500/20 text-red-400",
-          bet.status === "refunded" && "bg-slate-500/20 text-slate-400"
+          bet.status === "refunded" && "bg-forest-700/30 text-forest-400"
         )}>
           {bet.status === "won" ? `+${formatPoints(bet.points_earned)}` :
            bet.status === "lost" ? `${formatPoints(bet.points_earned)}` :
@@ -180,10 +154,10 @@ function BetCard({ bet, userId }: { bet: any; userId: string }) {
         </span>
       </div>
       <div className="flex items-center justify-between">
-        <p className="text-xs text-slate-300">
+        <p className="text-xs text-forest-300">
           {teamFlag} {teamName} · {formatPoints(bet.amount)} BP
         </p>
-        <p className="text-[10px] text-slate-600">{match.stage}</p>
+        <p className="text-[10px] text-forest-600">{match.stage}</p>
       </div>
     </div>
   );

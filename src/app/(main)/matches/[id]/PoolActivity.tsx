@@ -79,25 +79,25 @@ export default function PoolActivity({
     <section className="mb-6">
       <h3 className="text-sm font-semibold mb-3">Pool Activity</h3>
       {bets.length === 0 ? (
-        <p className="text-xs text-slate-500 text-center py-4">No bets yet. Be the first!</p>
+        <p className="text-xs text-forest-500 text-center py-4">No bets yet. Be the first!</p>
       ) : (
         <div className="space-y-2">
           {bets.map((bet) => (
-            <div key={bet.id} className="flex items-center gap-3 bg-slate-800/40 rounded-lg p-3">
-              <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-xs font-bold">
+            <div key={bet.id} className="flex items-center gap-3 bg-forest-800/40 rounded-lg p-3 border border-forest-700/20">
+              <div className="w-8 h-8 rounded-full bg-forest-700 flex items-center justify-center text-xs font-bold">
                 {getFullName(bet.profiles).charAt(0).toUpperCase()}
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-xs font-medium truncate">
                   {getFullName(bet.profiles)}
                 </p>
-                <p className="text-[10px] text-slate-500">
+                <p className="text-[10px] text-forest-500">
                   Bet on {bet.prediction === "home" ? homeTeam : awayTeam}
                 </p>
               </div>
               <div className="text-right">
                 <p className="text-xs font-medium text-green-400">+{formatPoints(bet.amount)} BP</p>
-                <p className="text-[10px] text-slate-600">{timeAgo(bet.created_at)}</p>
+                <p className="text-[10px] text-forest-600">{timeAgo(bet.created_at)}</p>
               </div>
             </div>
           ))}

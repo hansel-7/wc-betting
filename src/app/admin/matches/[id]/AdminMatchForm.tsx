@@ -79,74 +79,74 @@ export default function AdminMatchForm({ match }: { match: Match }) {
   return (
     <div className="space-y-4">
       {/* Edit Teams */}
-      <div className="bg-slate-800/60 rounded-xl p-4">
-        <h3 className="text-xs text-slate-400 mb-3">Edit Teams</h3>
+      <div className="bg-forest-800/60 rounded-xl p-4 border border-forest-700/20">
+        <h3 className="text-xs text-forest-400 mb-3">Edit Teams</h3>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-[10px] text-slate-500">Home Team</label>
+            <label className="text-[10px] text-forest-500">Home Team</label>
             <input
               value={homeTeam}
               onChange={(e) => setHomeTeam(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
             />
           </div>
           <div>
-            <label className="text-[10px] text-slate-500">Away Team</label>
+            <label className="text-[10px] text-forest-500">Away Team</label>
             <input
               value={awayTeam}
               onChange={(e) => setAwayTeam(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
             />
           </div>
           <div>
-            <label className="text-[10px] text-slate-500">Home Flag</label>
+            <label className="text-[10px] text-forest-500">Home Flag</label>
             <input
               value={homeFlag}
               onChange={(e) => setHomeFlag(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
             />
           </div>
           <div>
-            <label className="text-[10px] text-slate-500">Away Flag</label>
+            <label className="text-[10px] text-forest-500">Away Flag</label>
             <input
               value={awayFlag}
               onChange={(e) => setAwayFlag(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
             />
           </div>
         </div>
       </div>
 
       {/* Score + Status */}
-      <div className="bg-slate-800/60 rounded-xl p-4">
-        <h3 className="text-xs text-slate-400 mb-3">Score &amp; Status</h3>
+      <div className="bg-forest-800/60 rounded-xl p-4 border border-forest-700/20">
+        <h3 className="text-xs text-forest-400 mb-3">Score &amp; Status</h3>
         <div className="grid grid-cols-3 gap-3">
           <div>
-            <label className="text-[10px] text-slate-500">Home Score</label>
+            <label className="text-[10px] text-forest-500">Home Score</label>
             <input
               type="number"
               value={homeScore}
               onChange={(e) => setHomeScore(e.target.value)}
               min={0}
-              className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
             />
           </div>
           <div>
-            <label className="text-[10px] text-slate-500">Away Score</label>
+            <label className="text-[10px] text-forest-500">Away Score</label>
             <input
               type="number"
               value={awayScore}
               onChange={(e) => setAwayScore(e.target.value)}
               min={0}
-              className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
             />
           </div>
           <div>
-            <label className="text-[10px] text-slate-500">Status</label>
+            <label className="text-[10px] text-forest-500">Status</label>
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
+              className="w-full px-3 py-2 rounded-lg bg-forest-900 border border-forest-700 text-sm focus:outline-none focus:ring-1 focus:ring-green-500"
             >
               <option value="upcoming">Upcoming</option>
               <option value="live">Live</option>
@@ -157,7 +157,7 @@ export default function AdminMatchForm({ match }: { match: Match }) {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="mt-3 w-full py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-sm font-medium transition-colors disabled:opacity-50"
+          className="mt-3 w-full py-2 rounded-lg bg-forest-700 hover:bg-forest-600 text-sm font-medium transition-colors disabled:opacity-50"
         >
           {saving ? "Saving..." : "Save Changes"}
         </button>
@@ -165,9 +165,9 @@ export default function AdminMatchForm({ match }: { match: Match }) {
 
       {/* Settle Match */}
       {!match.result && (
-        <div className="bg-slate-800/60 rounded-xl p-4">
-          <h3 className="text-xs text-slate-400 mb-3">Settle Match</h3>
-          <p className="text-[10px] text-slate-500 mb-3">
+        <div className="bg-forest-800/60 rounded-xl p-4 border border-forest-700/20">
+          <h3 className="text-xs text-forest-400 mb-3">Settle Match</h3>
+          <p className="text-[10px] text-forest-500 mb-3">
             This will distribute points to winners or refund on draw. Cannot be undone.
           </p>
           <div className="grid grid-cols-3 gap-2">

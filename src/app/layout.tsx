@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "VinaBet - World Cup 2026 Pool",
+  title: "Vinacado - World Cup 2026 Pool",
   description: "Company betting pool for FIFA World Cup 2026",
 };
 
@@ -13,7 +13,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  themeColor: "#0f172a",
+  themeColor: "#0b1a0f",
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased bg-slate-950 text-white`}>
+      <body className={`${inter.className} antialiased bg-forest-950 text-white`}>
         {children}
       </body>
     </html>
