@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
 import { formatMatchTime, cn } from "@/lib/utils";
 import SeedButton from "./SeedButton";
+import CreateTestMatch from "./CreateTestMatch";
 
 export default async function AdminPage() {
   const supabase = await createClient();
@@ -21,6 +22,7 @@ export default async function AdminPage() {
     "Semi-final",
     "Third Place",
     "Final",
+    "Test Match",
   ];
 
   const grouped = stages.map((stage) => ({
@@ -32,7 +34,10 @@ export default async function AdminPage() {
     <div className="px-4 py-4">
       <div className="flex items-center justify-between mb-4">
         <p className="text-sm text-forest-400">{count ?? 0} matches in database</p>
-        {(count ?? 0) === 0 && <SeedButton />}
+        <div className="flex gap-2">
+          {(count ?? 0) === 0 && <SeedButton />}
+          <CreateTestMatch />
+        </div>
       </div>
 
       {allMatches.length === 0 ? (

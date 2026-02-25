@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { formatPoints, pointsToVND, pointsColor, cn } from "@/lib/utils";
+import Link from "next/link";
 
 export default async function LeaderboardPage() {
   const supabase = await createClient();
@@ -41,9 +42,11 @@ export default async function LeaderboardPage() {
             ];
             return (
               <div key={p.id} className="flex flex-col items-center">
-                <div className="w-12 h-12 rounded-full bg-forest-700 border-2 border-forest-600 flex items-center justify-center text-sm font-bold mb-2">
-                  {p.full_name.charAt(0)}
-                </div>
+                <Link href={p.id === user.id ? "/profile" : `/user/${p.id}`}>
+                  <div className="w-12 h-12 rounded-full bg-forest-700 border-2 border-forest-600 flex items-center justify-center text-sm font-bold mb-2 active:scale-90 transition-transform">
+                    {p.full_name.charAt(0)}
+                  </div>
+                </Link>
                 <p className="text-xs font-medium truncate max-w-[80px] text-center">{p.full_name}</p>
                 <p className={`text-[10px] mb-1 ${pointsColor(p.points)}`}>{formatPoints(p.points)} BP</p>
                 <div className={cn(
@@ -67,25 +70,26 @@ export default async function LeaderboardPage() {
           <span className="text-right">Points</span>
         </div>
         {profiles.map((p, i) => (
-          <div
-            key={p.id}
-            className={cn(
-              "grid grid-cols-[40px_1fr_auto] gap-2 px-4 py-3 items-center",
-              p.id === user.id && "bg-green-500/5",
-              i !== profiles.length - 1 && "border-b border-forest-700/20"
-            )}
-          >
-            <span className="text-xs text-forest-400 font-medium">{i + 1}</span>
-            <div className="min-w-0">
-              <p className={cn("text-sm truncate", p.id === user.id && "text-green-400 font-medium")}>
-                {p.full_name}{p.id === user.id ? " (You)" : ""}
-              </p>
+          <Link key={p.id} href={p.id === user.id ? "/profile" : `/user/${p.id}`}>
+            <div
+              className={cn(
+                "grid grid-cols-[40px_1fr_auto] gap-2 px-4 py-3 items-center active:bg-forest-700/20 transition-colors",
+                p.id === user.id && "bg-green-500/5",
+                i !== profiles.length - 1 && "border-b border-forest-700/20"
+              )}
+            >
+              <span className="text-xs text-forest-400 font-medium">{i + 1}</span>
+              <div className="min-w-0">
+                <p className={cn("text-sm truncate", p.id === user.id && "text-green-400 font-medium")}>
+                  {p.full_name}{p.id === user.id ? " (You)" : ""}
+                </p>
+              </div>
+              <div className="text-right">
+                <p className={`text-sm font-medium ${pointsColor(p.points)}`}>{formatPoints(p.points)}</p>
+                <p className="text-[10px] text-forest-500">{pointsToVND(p.points)}</p>
+              </div>
             </div>
-            <div className="text-right">
-              <p className={`text-sm font-medium ${pointsColor(p.points)}`}>{formatPoints(p.points)}</p>
-              <p className="text-[10px] text-forest-500">{pointsToVND(p.points)}</p>
-            </div>
-          </div>
+          </Link>
         ))}
         {profiles.length === 0 && (
           <p className="text-sm text-forest-500 text-center py-8">No players yet</p>

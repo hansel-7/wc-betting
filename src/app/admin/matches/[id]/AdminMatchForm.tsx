@@ -15,6 +15,7 @@ interface Match {
   away_score: number | null;
   status: string;
   result: string | null;
+  stage: string;
 }
 
 export default function AdminMatchForm({ match }: { match: Match }) {
@@ -27,6 +28,8 @@ export default function AdminMatchForm({ match }: { match: Match }) {
   const [status, setStatus] = useState(match.status);
   const [saving, setSaving] = useState(false);
   const [settling, setSettling] = useState(false);
+  const [resetting, setResetting] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [message, setMessage] = useState("");
   const router = useRouter();
   const supabase = createClient();
@@ -73,6 +76,53 @@ export default function AdminMatchForm({ match }: { match: Match }) {
     } else {
       setMessage(`Match settled as "${result}".`);
       router.refresh();
+    }
+  }
+
+  async function handleReset() {
+    if (!confirm("Reset this match? All settlements will be reversed and bets restored to pending.")) return;
+    setResetting(true);
+    setMessage("");
+
+    const { error } = await supabase.rpc("reset_match", {
+      p_match_id: match.id,
+    });
+
+    setResetting(false);
+    if (error) {
+      setMessage(`Error: ${error.message}`);
+    } else {
+      setMessage("Match reset successfully.");
+      router.refresh();
+    }
+  }
+
+  async function handleDelete() {
+    if (!confirm("Delete this test match and all its bets? This cannot be undone.")) return;
+    setDeleting(true);
+    setMessage("");
+
+    const { error: betsError } = await supabase
+      .from("bets")
+      .delete()
+      .eq("match_id", match.id);
+
+    if (betsError) {
+      setMessage(`Error deleting bets: ${betsError.message}`);
+      setDeleting(false);
+      return;
+    }
+
+    const { error: matchError } = await supabase
+      .from("matches")
+      .delete()
+      .eq("id", match.id);
+
+    setDeleting(false);
+    if (matchError) {
+      setMessage(`Error: ${matchError.message}`);
+    } else {
+      router.push("/admin");
     }
   }
 
@@ -197,10 +247,30 @@ export default function AdminMatchForm({ match }: { match: Match }) {
       )}
 
       {match.result && (
-        <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4 text-center">
-          <p className="text-sm text-green-400">
+        <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4">
+          <p className="text-sm text-green-400 text-center mb-3">
             Match settled: <strong>{match.result === "draw" ? "Draw (all refunded)" : match.result === "home" ? `${match.home_team} won` : `${match.away_team} won`}</strong>
           </p>
+          <button
+            onClick={handleReset}
+            disabled={resetting}
+            className="w-full py-2 rounded-lg bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-400 text-xs font-medium transition-colors disabled:opacity-50"
+          >
+            {resetting ? "Resetting..." : "Reset Settlement (undo & restore bets)"}
+          </button>
+        </div>
+      )}
+
+      {match.stage === "Test Match" && (
+        <div className="bg-red-500/5 border border-red-500/20 rounded-xl p-4">
+          <h3 className="text-xs text-red-400 mb-2">Danger Zone</h3>
+          <button
+            onClick={handleDelete}
+            disabled={deleting}
+            className="w-full py-2 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-400 text-xs font-medium transition-colors disabled:opacity-50"
+          >
+            {deleting ? "Deleting..." : "Delete Test Match"}
+          </button>
         </div>
       )}
 

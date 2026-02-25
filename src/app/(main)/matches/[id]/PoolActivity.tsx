@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { formatPoints } from "@/lib/utils";
+import Link from "next/link";
 
 interface BetActivity {
   id: string;
@@ -83,23 +84,25 @@ export default function PoolActivity({
       ) : (
         <div className="space-y-2">
           {bets.map((bet) => (
-            <div key={bet.id} className="flex items-center gap-3 bg-forest-800/40 rounded-lg p-3 border border-forest-700/20">
-              <div className="w-8 h-8 rounded-full bg-forest-700 flex items-center justify-center text-xs font-bold">
-                {getFullName(bet.profiles).charAt(0).toUpperCase()}
+            <Link key={bet.id} href={`/user/${bet.user_id}`}>
+              <div className="flex items-center gap-3 bg-forest-800/40 rounded-lg p-3 border border-forest-700/20 active:bg-forest-700/20 transition-colors">
+                <div className="w-8 h-8 rounded-full bg-forest-700 flex items-center justify-center text-xs font-bold">
+                  {getFullName(bet.profiles).charAt(0).toUpperCase()}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-medium truncate">
+                    {getFullName(bet.profiles)}
+                  </p>
+                  <p className="text-[10px] text-forest-500">
+                    Bet on {bet.prediction === "home" ? homeTeam : awayTeam}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-xs font-medium text-green-400">+{formatPoints(bet.amount)} BP</p>
+                  <p className="text-[10px] text-forest-600">{timeAgo(bet.created_at)}</p>
+                </div>
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-medium truncate">
-                  {getFullName(bet.profiles)}
-                </p>
-                <p className="text-[10px] text-forest-500">
-                  Bet on {bet.prediction === "home" ? homeTeam : awayTeam}
-                </p>
-              </div>
-              <div className="text-right">
-                <p className="text-xs font-medium text-green-400">+{formatPoints(bet.amount)} BP</p>
-                <p className="text-[10px] text-forest-600">{timeAgo(bet.created_at)}</p>
-              </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}
