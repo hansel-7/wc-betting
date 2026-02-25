@@ -23,7 +23,7 @@ export default function BottomNav() {
               key={href}
               href={href}
               className={cn(
-                "flex flex-col items-center gap-0.5 px-3 py-1.5 transition-colors",
+                "flex flex-col items-center gap-0.5 px-3 py-1.5 transition-all active:scale-90",
                 isActive ? "text-green-400" : "text-forest-400 hover:text-forest-300"
               )}
             >

@@ -20,6 +20,11 @@
 
 body {
   min-height: 100dvh;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, a, [role="button"] {
+  touch-action: manipulation;
 }
 
 @layer utilities {

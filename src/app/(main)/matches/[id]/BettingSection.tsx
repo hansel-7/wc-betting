@@ -126,7 +126,8 @@ export default function BettingSection({
             "p-3 rounded-xl border-2 transition-all text-center",
             prediction === "home"
               ? "border-green-500 bg-green-500/10"
-              : "border-forest-700 hover:border-forest-600"
+              : "border-forest-700 hover:border-forest-600",
+            "active:scale-[0.95]"
           )}
         >
           <span className="text-lg block">{match.home_flag}</span>
@@ -138,7 +139,8 @@ export default function BettingSection({
             "p-3 rounded-xl border-2 transition-all text-center",
             prediction === "away"
               ? "border-green-500 bg-green-500/10"
-              : "border-forest-700 hover:border-forest-600"
+              : "border-forest-700 hover:border-forest-600",
+            "active:scale-[0.95]"
           )}
         >
           <span className="text-lg block">{match.away_flag}</span>
@@ -166,7 +168,7 @@ export default function BettingSection({
             <button
               key={q}
               onClick={() => setAmount(String(q))}
-              className="flex-1 text-[10px] py-1.5 rounded-lg bg-forest-700 hover:bg-forest-600 transition-colors"
+              className="flex-1 text-[10px] py-1.5 rounded-lg bg-forest-700 hover:bg-forest-600 active:scale-[0.93] transition-all"
             >
               {q}
             </button>
@@ -188,7 +190,7 @@ export default function BettingSection({
       <button
         onClick={handlePlaceBet}
         disabled={!prediction || amountNum <= 0 || loading}
-        className="w-full py-3 rounded-xl bg-green-500 hover:bg-green-600 text-white font-semibold transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+        className="w-full py-3 rounded-xl bg-green-500 hover:bg-green-600 active:scale-[0.97] text-white font-semibold transition-all disabled:opacity-40 disabled:cursor-not-allowed"
       >
         {loading ? "Placing bet..." : "Place Bet"}
       </button>

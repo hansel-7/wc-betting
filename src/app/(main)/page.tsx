@@ -86,7 +86,7 @@ export default async function HomePage() {
           <div className="space-y-3">
             {liveMatches.map((m) => (
               <Link key={m.id} href={`/matches/${m.id}`}>
-                <div className="bg-forest-800/80 rounded-2xl p-4 border border-forest-700/30 hover:border-forest-700/60 transition-colors">
+                <div className="bg-forest-800/80 rounded-2xl p-4 border border-forest-700/30 hover:border-forest-700/60 active:scale-[0.98] transition-all">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span className="text-lg">{m.home_flag}</span>
@@ -117,7 +117,7 @@ export default async function HomePage() {
           {upcomingMatches && upcomingMatches.length > 0 ? (
             upcomingMatches.map((m) => (
               <Link key={m.id} href={`/matches/${m.id}`}>
-                <div className="bg-forest-800/60 rounded-xl p-3 border border-forest-700/20 hover:border-forest-700/40 transition-colors">
+                <div className="bg-forest-800/60 rounded-xl p-3 border border-forest-700/20 hover:border-forest-700/40 active:scale-[0.98] transition-all">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 flex-1 min-w-0">
                       <span>{m.home_flag}</span>
