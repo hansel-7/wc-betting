@@ -1,19 +1,16 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 
 export default function VideoSplash({ onComplete }: { onComplete: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [fading, setFading] = useState(false);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.play().catch(() => {
+  function handleCanPlay() {
+    videoRef.current?.play().catch(() => {
       onComplete();
     });
-  }, [onComplete]);
+  }
 
   function handleEnded() {
     setFading(true);
@@ -21,6 +18,10 @@ export default function VideoSplash({ onComplete }: { onComplete: () => void }) 
   }
 
   function handleSkip() {
+    const video = videoRef.current;
+    if (video) {
+      video.pause();
+    }
     setFading(true);
     setTimeout(onComplete, 300);
   }
@@ -36,7 +37,10 @@ export default function VideoSplash({ onComplete }: { onComplete: () => void }) 
         src="/trailer.mp4"
         muted
         playsInline
+        preload="auto"
+        onCanPlay={handleCanPlay}
         onEnded={handleEnded}
+        onError={() => onComplete()}
         className="w-full h-full object-cover"
       />
       <button
