@@ -1,31 +1,17 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import VideoSplash from "./VideoSplash";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showSplash, setShowSplash] = useState(false);
   const router = useRouter();
   const supabase = createClient();
-
-  useEffect(() => {
-    const seen = sessionStorage.getItem("vinacado_splash_seen");
-    if (!seen) {
-      setShowSplash(true);
-    }
-  }, []);
-
-  const handleSplashComplete = useCallback(() => {
-    sessionStorage.setItem("vinacado_splash_seen", "1");
-    setShowSplash(false);
-  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -45,8 +31,6 @@ export default function LoginPage() {
   }
 
   return (
-    <>
-    {showSplash && <VideoSplash onComplete={handleSplashComplete} />}
     <div className="min-h-dvh flex flex-col items-center justify-center px-6 bg-forest-950">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
@@ -99,6 +83,5 @@ export default function LoginPage() {
         </p>
       </div>
     </div>
-    </>
   );
 }
